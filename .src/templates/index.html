@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Bitsmart</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>Predict Bitcoin Price</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict_bitcoin')}}"method="post">
+    	<input type="date"
+               id="input_date"
+               name="input_date"
+               placeholder="Date"
+               required="required">
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   {{date_validation}}
+   <br>
+   You have selected today as {{ input_date }}. Bitsmart has made the following predictions.
+   <br>
+   <div>
+   <h1>
+    Predicted Prices (in USD) for the next seven days are:
+   </h1>  
+   <table border='1' style='border-collapse:collapse'>
+    <tr>
+      <td>Highest Price</td>
+      <td> {{ max_high }} </td>
+    </tr>
+    <tr>
+      <td>Lowest Price</td>
+      <td> {{ min_low }} </td>
+    </tr>
+    <tr>
+      <td>Average Closing Price</td>
+      <td> {{ avg_close }} </td>
+    </tr>
+
+   </table>
+  </div>
+  <div>
+    <h1>Recommended Swing Trading Strategy</h1>
+    <table border='1' style='border-collapse:collapse'>
+      <tr><td>Sell All</td><td>{{sell_date}}</td></tr>
+      <tr><td>All In</td><td>{{buy_date}}</td></tr>
+      <tr><td>Final Amount (in USD)</td><td>{{final_amt}}</td></tr>
+    </table>
+  </div>
+   
+
+ </div>
+
+
+</body>
+</html>
